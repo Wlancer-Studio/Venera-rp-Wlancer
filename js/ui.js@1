@@ -1,0 +1,91 @@
+$(document).ready(function () {
+
+  function revoke(a1) {
+      var length = parseInt(a1),
+          charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+          retVal = "";
+      for (var i = 0, n = charset.length; i < length; ++i) {
+          retVal += charset.charAt(Math.floor(Math.random() * n));
+      }
+      return retVal;
+  }
+
+  window.session = revoke(10);
+  localStorage.setItem("session", window.session);
+    var onStorage = function (e) {
+        if (e.key === 'session' && e.newValue !== window.session)
+            localStorage.setItem("multitab", window.session);
+        if (e.key === "multitab" && e.newValue && e.newValue !== window.session) {
+            window.removeEventListener("storage", onStorage);
+            localStorage.setItem("session", localStorage.getItem("multitab"));
+            localStorage.removeItem("multitab");
+            window.close();
+        }
+    };
+    window.addEventListener('storage', onStorage);
+
+    /* Hide warning window (Login) */
+    $('.auth-warning-window > img').on('click', function (e) {
+        e.preventDefault();
+        $('section.auth-warning').animate({
+            'opacity': 0
+        }, 300, function () {
+            $(this).hide();
+        })
+    });
+
+    /* Hide warning window (Login) */
+    $('#ucp--roulette--result__close').on('click', function (e) {
+        e.preventDefault();
+        $('.ucp--roulette--result').animate({
+            'opacity': 0
+        }, 300, function () {
+            $(this).hide();
+        })
+    });
+
+    $('#ucp--roulette--result__close2').on('click', function (e) {
+        e.preventDefault();
+        $('.ucp--roulette--result2').animate({
+            'opacity': 0
+        }, 300, function () {
+            $(this).hide();
+        })
+    });
+
+
+    let height = $('.ucp--wrapper').height();
+    let width = $('.ucp--wrapper').width();
+    $('.auth-warning').height(height + "px");
+    $('.ucp--roulette--result').height(height + "px");
+    $('.ucp--roulette--result2').height(height + "px");
+});
+
+
+$(document).ready(function () {
+  
+    'use strict';
+	
+	let previousScrollTop = 0;
+	let currentScrollTop = 0;
+  
+    $(window).scroll(function () {
+	  const navbar = $('#navbar');
+  	  const navbarHeight = navbar.height();
+       
+      currentScrollTop = $(window).scrollTop();
+
+	  if (currentScrollTop - previousScrollTop > navbarHeight * 2 && currentScrollTop > navbarHeight * 2) {
+	    navbar.stop(true);
+	    navbar.fadeOut(1000);
+	  
+	    previousScrollTop = currentScrollTop;
+	  } else if ((previousScrollTop - currentScrollTop > navbarHeight * 2 && currentScrollTop > navbarHeight) || currentScrollTop <= navbarHeight) {
+	    navbar.stop(true);
+	    navbar.fadeIn(1000);
+	  
+	    previousScrollTop = currentScrollTop;
+	  }
+    });
+    
+  });

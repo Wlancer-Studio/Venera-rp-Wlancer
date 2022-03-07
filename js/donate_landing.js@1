@@ -1,0 +1,352 @@
+
+var step = 0;
+
+let window_open_1 = 0;
+let window_open_2 = 0;
+let window_open_3 = 0;
+let window_open_4 = 0;
+
+function load_window(a1) {
+
+	if(parseInt(a1) == 0) {
+		$('#want_buyit').on('click', function(event) {
+			console.log(`click`);
+			if(window_open_1 == 0) {
+				event.preventDefault();
+				$('.window-donate').fadeIn(1000);
+				window_open_1 = 1;
+				load_window(0);
+				console.log('reload 0');
+			}
+		});
+	} else if(parseInt(a1) == 1) {
+		$('.button--pack').on('click', function(event) {
+			console.log(`click`);
+			if(window_open_2 == 0) {
+        event.preventDefault();
+        let get_id_pack = $(this).data('id');
+				let get_name_pack = $(this).data('name');
+				let get_coast = $(this).data('coast');
+				$('#name_pack').html(get_name_pack);
+				$('#name_pack_about').html(get_name_pack);
+        $('#pack_coast').html(get_coast);
+        select_pack_id = parseInt(get_id_pack);
+        console.log(`select pack id ${select_pack_id}`);
+				$('.window-donate2').fadeIn(1000);
+				window_open_2 = 1;
+				load_window(1);
+				console.log('reload 1');
+			}
+		});
+  } else if(parseInt(a1) == 2) {
+		$('#show_vip').on('click', function(event) {
+			console.log(`click`);
+			if(window_open_3 == 0) {
+        event.preventDefault();
+        $('.window-donate').fadeOut(1000);
+        window_open_1 = 0;
+        $('.window-donate3').fadeIn(1000);
+				window_open_3 = 1;
+				load_window(3);
+				console.log('reload 2');
+			}
+		});
+	} else if(parseInt(a1) == 3) {
+		$('.button--vip').on('click', function(event) {
+			console.log(`click`);
+			if(window_open_4 == 0) {
+        event.preventDefault();
+        let get_name = $(this).data('name');
+        let get_coast = parseInt($(this).data('coast'));
+        let get_type = parseInt($(this).data('type'));
+        $('.window-donate3').fadeOut(1000);
+				$('#name_vip').html(`Покупка ${get_name} VIP привелегий`);
+				$('#name_vip_about').html(`[${get_type}] артикул.`);
+        $('#vip_coast').html(get_coast);
+        select_vip_id = get_type;
+				$('.window-donate4').fadeIn(1000);
+				window_open_4= 1;
+				load_window(3);
+				console.log('reload 4');
+			}
+		});
+  }
+
+}
+
+for(let i = 0; i < 4; i++) {
+	load_window(i);
+}
+
+	
+
+$(document).mouseup(function (e) {
+	if(window_open_1 == 1) {
+		var container = $(".window-donate");
+		if (container.has(e.target).length === 0){
+			container.fadeOut(1000);
+			window_open_1 = 0;
+		}
+	}
+	if(window_open_2 == 1) {
+		var container = $(".window-donate2");
+		if (container.has(e.target).length === 0){
+			container.fadeOut(1000);
+			window_open_2 = 0;
+		}
+  }
+  if(window_open_3 == 1) {
+		var container = $(".window-donate3");
+		if (container.has(e.target).length === 0){
+			container.fadeOut(1000);
+			window_open_3 = 0;
+		}
+  }
+  if(window_open_4 == 1) {
+		var container = $(".window-donate4");
+		if (container.has(e.target).length === 0){
+			container.fadeOut(1000);
+			window_open_4 = 0;
+    }
+  }
+});
+
+var select_server = 0;
+var select_server_2 = 0;
+var select_server_3 = 0;
+var select_pack_id = 0;
+var select_pack_sum = 0;
+var select_vip_id = 0;
+var select_vip_sum = 0;
+
+for(let i = 1; i < 10; i++) {
+  reload_forms(i);
+}
+
+function reload_forms(number) {
+  if(parseInt(number) == 1) {
+    $('#select_server_1').one('click', function (event) {
+      event.preventDefault();
+      select_server = 1;
+      console.log('select 1');
+      $('#select_server_1').css('background', 'rgba(255,255,255,1)');
+      $('#select_server_2').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server_3').css('background', 'rgba(255,255,255,0.5)');
+      reload_forms(1);
+    });
+  } else if(parseInt(number) == 2) {
+    $('#select_server_2').one('click', function (event) {
+      event.preventDefault();
+      select_server = 2;
+      console.log('select 2');
+      $('#select_server_1').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server_2').css('background', 'rgba(255,255,255,1)');
+      $('#select_server_3').css('background', 'rgba(255,255,255,0.5)');
+      reload_forms(2);
+    });
+  } else if(parseInt(number) == 3) {
+    $('#select_server_3').one('click', function (event) {
+      event.preventDefault();
+      select_server = 3;
+      console.log('select 3');
+      $('#select_server_1').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server_2').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server_3').css('background', 'rgba(255,255,255,1)');
+      reload_forms(3);
+    });
+  } else if(parseInt(number) == 4) {
+    $('#select_server2_1').one('click', function (event) {
+      event.preventDefault();
+      select_server_2 = 1;
+      console.log('select 1');
+      $('#select_server2_1').css('background', 'rgba(255,255,255,1)');
+      $('#select_server2_2').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server2_3').css('background', 'rgba(255,255,255,0.5)');
+      reload_forms(4);
+    });
+  } else if(parseInt(number) == 5) {
+    $('#select_server2_2').one('click', function (event) {
+      event.preventDefault();
+      select_server_2 = 2;
+      console.log('select 2');
+      $('#select_server2_1').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server2_2').css('background', 'rgba(255,255,255,1)');
+      $('#select_server2_3').css('background', 'rgba(255,255,255,0.5)');
+      reload_forms(5);
+    });
+  } else if(parseInt(number) == 6) {
+    $('#select_server2_3').one('click', function (event) {
+      event.preventDefault();
+      select_server_2 = 3;
+      console.log('select 3');
+      $('#select_server2_1').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server2_2').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server2_3').css('background', 'rgba(255,255,255,1)');
+      reload_forms(6);
+    });
+  } else if(parseInt(number) == 7) {
+    $('#select_server3_1').one('click', function (event) {
+      event.preventDefault();
+      select_server_3 = 1;
+      console.log('select 1');
+      $('#select_server3_1').css('background', 'rgba(255,255,255,1)');
+      $('#select_server3_2').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server3_3').css('background', 'rgba(255,255,255,0.5)');
+      reload_forms(7);
+    });
+  } else if(parseInt(number) == 8) {
+    $('#select_server3_2').one('click', function (event) {
+      event.preventDefault();
+      select_server_2 = 2;
+      console.log('select 2');
+      $('#select_server3_1').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server3_2').css('background', 'rgba(255,255,255,1)');
+      $('#select_server3_3').css('background', 'rgba(255,255,255,0.5)');
+      reload_forms(8);
+    });
+  } else if(parseInt(number) == 9) {
+    $('#select_server3_3').one('click', function (event) {
+      event.preventDefault();
+      select_server_2 = 3;
+      console.log('select 3');
+      $('#select_server3_1').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server3_2').css('background', 'rgba(255,255,255,0.5)');
+      $('#select_server3_3').css('background', 'rgba(255,255,255,1)');
+      reload_forms(9);
+    });
+  }
+}
+
+function load_window2(a1) {
+
+  if(parseInt(a1) == 0) {
+
+    $('#go_to_pay').on('click', function() {
+      if(status == 0) {
+        event.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/api_srv/99',
+          dataType: 'JSON',
+          data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            value_1: select_server,
+            value_2: $('#username').val(),
+            value_3: $('#sum').val()
+          },
+          success: function(data) {
+            console.log(`DATA: ${data}`);
+            if(isNaN(data)) {
+              window.location.href = 'https://unitpay.ru/pay/83041-6f320/paypal?account=' + data.account + '&sum=' + data.sum + '&desc=' + data.desc + '&signature=' + data.hash;
+              step = 1;
+              console.log('gj');
+              console.log(data);
+            } else {
+              console.log('error');
+              switch(parseInt(data)) {
+                case 0: bres = 'Не заполнены, необходимые поля для совершения операции, попробуйте вновь'; break;
+                case 1: bres = 'Выберите сервер для совершения операции, нужено выбрать один из предложенных вариантов'; break;
+                case 2: bres = 'Игровой персонаж не найден на этом сервере'; break;
+                case 3: bres = 'Игровой персонаж найден на сервере, но не в личном кабинете. Пожалуйста, войдите сначала в личный кабинет'; break;
+              }
+              $('.auth-warning').fadeIn(1000);
+              $('.auth-warning-window h2').html('Пополнение баланса');
+              $('.auth-warning-window p').html(bres);
+            }
+            load_window2(0);
+          }
+        });
+      } else {
+    
+      }
+    });
+  } else if(parseInt(a1) == 1) {
+  
+    $('#go_to_pay2').click(function( event ) {
+      if(status == 0) {
+        event.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/api_srv/98',
+          dataType: 'JSON',
+          data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            value_1: select_server_2,
+            value_2: $('#username_2').val(),
+            value_3: select_pack_id
+          },
+          success: function(data) {
+            console.log(`DATA: ${data}`);
+            if(isNaN(data)) {
+              window.location.href = 'https://unitpay.ru/pay/83041-6f320/paypal?account=' + data.account + '&sum=' + data.sum + '&desc=' + data.desc + '&signature=' + data.hash;
+              step = 1;
+              console.log('gj');
+              console.log(data);
+            } else {
+              console.log('error');
+              switch(parseInt(data)) {
+                case 0: bres = 'Не заполнены, необходимые поля для совершения операции, попробуйте вновь'; break;
+                case 1: bres = 'Выберите сервер для совершения операции, нужено выбрать один из предложенных вариантов'; break;
+                case 2: bres = 'Игровой персонаж не найден на этом сервере'; break;
+                case 3: bres = 'Игровой персонаж найден на сервере, но не в личном кабинете. Пожалуйста, войдите сначала в личный кабинет'; break;
+                case 4: bres = 'Неизвестный тип пака, пожалуйста попробуйте вновь'; break;
+              }
+              $('.auth-warning').fadeIn(1000);
+              $('.auth-warning-window h2').html('Покупка набора');
+              $('.auth-warning-window p').html(bres);
+            }
+            load_window2(1);
+          }
+        });
+      } else {
+    
+      }
+    });
+  } else if(parseInt(a1) == 2) {
+  
+  $('#go_to_pay3').click(function( event ) {
+      if(status == 0) {
+        event.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/api_srv/97',
+          dataType: 'JSON',
+          data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            value_1: select_server_3,
+            value_2: $('#username_3').val(),
+            value_3: select_vip_id
+          },
+          success: function(data) {
+            console.log(`DATA: ${data}`);
+            if(isNaN(data)) {
+              window.location.href = 'https://unitpay.ru/pay/83041-6f320/paypal?account=' + data.account + '&sum=' + data.sum + '&desc=' + data.desc + '&signature=' + data.hash;
+              step = 1;
+              console.log('gj');
+              console.log(data);
+            } else {
+              console.log('error');
+              switch(parseInt(data)) {
+                case 0: bres = 'Не заполнены, необходимые поля для совершения операции, попробуйте вновь'; break;
+                case 1: bres = 'Выберите сервер для совершения операции, нужено выбрать один из предложенных вариантов'; break;
+                case 2: bres = 'Игровой персонаж не найден на этом сервере'; break;
+                case 3: bres = 'Игровой персонаж найден на сервере, но не в личном кабинете. Пожалуйста, войдите сначала в личный кабинет'; break;
+                case 4: bres = 'Неизвестный тип привелегий, пожалуйста попробуйте вновь'; break;
+              }
+              $('.auth-warning').fadeIn(1000);
+              $('.auth-warning-window h2').html('Покупка VIP привелегий');
+              $('.auth-warning-window p').html(bres);
+            }
+            load_window2(2);
+          }
+        });
+      } else {
+    
+      }
+    });
+  }
+}
+
+for(let i = 0; i < 3; i++) {
+	load_window2(i);
+}
